@@ -8,7 +8,7 @@
 <!-- Save on Command Node bluefox right-->
 <node if="$(arg bluefox_right_on)"
 name="bluefox_right_image_client" pkg="image_sender" type="img_sender_client" output="screen">
-	<param name="identifier" type="string" value="/mv_25000060/image_raw"/>
+	<param name="topic_name" type="string" value="/mv_25000060/image_requested"/>
 	<param name="service_name" type="string" value="/server/mv_25000060"/>
 </node>
 </launch>

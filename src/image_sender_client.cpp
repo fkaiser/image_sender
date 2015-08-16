@@ -10,8 +10,9 @@ class ImgSenderClient{
 public:
 	ImgSenderClient(): n_("/request_client"){
 		ros::param::get("~service_name",service_name_);
+		ros::param::get("~topic_name",topic_name_);
 		client_ = n_.serviceClient<image_sender::SendImage>(service_name_);
-		img_pub_=n_.advertise<sensor_msgs::Image>("rate_image", 1,this);
+		img_pub_=n_.advertise<sensor_msgs::Image>(topic_name_, 1,this);
 	}
 	void ImgRequest()
 	  {
@@ -31,6 +32,7 @@ private:
 	image_sender::SendImage srv_;
 	ros::Publisher img_pub_;
 	std::string service_name_;
+	std::string topic_name_;
 };
 
 
