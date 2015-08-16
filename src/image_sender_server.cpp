@@ -15,10 +15,13 @@ public:
 		advertiseimgservice();
 		subscribetoimage();
 
+
+
 	}
 
 	void subscribetoimage(){
-		img_sub_ = ih_.subscribe("/mv_25000060/image_raw",1,&ImgSender::imgsaver,this);
+		ros::param::get("~identifier",topic_name_);
+		img_sub_ = ih_.subscribe(topic_name_,1,&ImgSender::imgsaver,this);
 
 	}
 
@@ -61,6 +64,7 @@ private:
 	sensor_msgs::Image img_;
 	ros::CallbackQueue server_queue_;
 	ros::CallbackQueue image_queue_;
+	std::string topic_name_;
 
 };
 
