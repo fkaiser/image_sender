@@ -17,7 +17,6 @@ public:
 	void ImgRequest()
 	  {
 		  if(client_.call(srv_)){
-			  ROS_INFO_STREAM("Got image");
 			  img_pub_.publish(srv_.response.img);
 		  }
 		  else

@@ -33,7 +33,6 @@ public:
 
 	void imgsaver(const sensor_msgs::ImageConstPtr& msg){
 	img_=*msg;
-		ROS_INFO_STREAM("See something");
 	}
 
 	void EmtpyImgQueue()
