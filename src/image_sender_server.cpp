@@ -14,6 +14,7 @@ public:
 		ih_.setCallbackQueue(&image_queue_);
 		advertiseimgservice();
 		subscribetoimage();
+
 	}
 
 	void subscribetoimage(){
@@ -24,6 +25,7 @@ public:
 	void advertiseimgservice()
 	{
 		server_=ch_.advertiseService("image_publisher", &ImgSender::sendimg,this);
+		img_pub_=ch_.advertise<sensor_msgs::Image>("server_publisher", 1,this);
 	}
 
 	void imgsaver(const sensor_msgs::ImageConstPtr& msg){
@@ -39,13 +41,14 @@ public:
 	void EmtpyServerQueue()
 		  {
 			  server_queue_.callOne();
+
 		  }
 
 	bool sendimg(image_sender::SendImage::Request &req,
 			image_sender::SendImage::Response &res) {
 		// Get latest image from queue
 		EmtpyImgQueue();
-		std::string topic_name;
+		img_pub_.publish(img_);
 		return true;
 	}
 
@@ -59,6 +62,7 @@ private:
 	sensor_msgs::Image img_;
 	ros::CallbackQueue server_queue_;
 	ros::CallbackQueue image_queue_;
+	ros::Publisher img_pub_;
 
 };
 
