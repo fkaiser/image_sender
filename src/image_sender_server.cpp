@@ -48,6 +48,7 @@ public:
 			image_sender::SendImage::Response &res) {
 		// Get latest image from queue
 		EmtpyImgQueue();
+		res.img=img_;
 		img_pub_.publish(img_);
 		return true;
 	}
