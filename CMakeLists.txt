@@ -109,8 +109,16 @@ include_directories(
 
 #Server
 add_executable(img_sender_server src/image_sender_server.cpp)
+
 target_link_libraries(img_sender_server ${catkin_LIBRARIES})
 add_dependencies(img_sender_server image_sender_gencpp)
+
+#Client
+add_executable(img_sender_client src/image_sender_client.cpp)
+target_link_libraries(img_sender_client ${catkin_LIBRARIES})
+add_dependencies(img_sender_client image_sender_gencpp)
+
+
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes

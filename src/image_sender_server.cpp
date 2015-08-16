@@ -70,7 +70,7 @@ private:
 
 int main(int argc, char **argv)
 {
-	ros::init(argc, argv, "Image_sender_server");
+	ros::init(argc, argv, "Image_sender_client");
 	ImgSender sender;
 	ros::Rate R(30);
 	while(ros::ok()){
