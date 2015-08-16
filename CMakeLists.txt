@@ -8,6 +8,8 @@ find_package(catkin REQUIRED COMPONENTS
   dynamic_reconfigure
   roscpp
   rospy
+  message_generation
+  sensor_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -51,11 +53,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+   FILES
+  SendImage.srv
+   )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -65,10 +66,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+ generate_messages(
+   DEPENDENCIES
+   std_msgs  # Or other packages containing msgs
+   sensor_msgs
+ )
 
 ###################################
 ## catkin specific configuration ##
@@ -80,10 +82,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES image_sender
-#  CATKIN_DEPENDS dynamic_reconfigure roscpp rospy
-#  DEPENDS system_lib
+ INCLUDE_DIRS include
+  LIBRARIES image_sender
+ CATKIN_DEPENDS dynamic_reconfigure roscpp rospy
+  DEPENDS system_lib
 )
 
 ###########
@@ -104,6 +106,11 @@ include_directories(
 
 ## Declare a cpp executable
 # add_executable(image_sender_node src/image_sender_node.cpp)
+
+#Server
+add_executable(img_sender_server src/image_sender_server.cpp)
+target_link_libraries(img_sender_server ${catkin_LIBRARIES})
+add_dependencies(img_sender_server image_sender_gencpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
