@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "Image_sender_server");
 	ImgSenderClient img_client;
-	ros::Rate R(10);
+	ros::Rate R(1);
 	while(ros::ok()){
 		img_client.ImgRequest();
 		R.sleep();

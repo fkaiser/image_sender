@@ -25,7 +25,6 @@ public:
 	void advertiseimgservice()
 	{
 		server_=ch_.advertiseService("image_publisher", &ImgSender::sendimg,this);
-		img_pub_=ch_.advertise<sensor_msgs::Image>("server_publisher", 1,this);
 	}
 
 	void imgsaver(const sensor_msgs::ImageConstPtr& msg){
@@ -40,7 +39,7 @@ public:
 
 	void EmtpyServerQueue()
 		  {
-			  server_queue_.callOne();
+			server_queue_.callOne();
 
 		  }
 
@@ -49,7 +48,6 @@ public:
 		// Get latest image from queue
 		EmtpyImgQueue();
 		res.img=img_;
-		img_pub_.publish(img_);
 		return true;
 	}
 
@@ -63,7 +61,6 @@ private:
 	sensor_msgs::Image img_;
 	ros::CallbackQueue server_queue_;
 	ros::CallbackQueue image_queue_;
-	ros::Publisher img_pub_;
 
 };
 
