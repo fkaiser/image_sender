@@ -9,5 +9,6 @@
 <node if="$(arg bluefox_right_on)"
 name="bluefox_right_image_server" pkg="image_sender" type="img_sender_server" output="screen">
 	<param name="identifier" type="string" value="/mv_25000060/image_raw"/>
+	<param name="service_name" type="string" value="/server/image_publisher"/>
 </node>
 </launch>

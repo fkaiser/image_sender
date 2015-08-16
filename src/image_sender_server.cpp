@@ -27,7 +27,8 @@ public:
 
 	void advertiseimgservice()
 	{
-		server_=ch_.advertiseService("image_publisher", &ImgSender::sendimg,this);
+		ros::param::get("~service_name",service_name_);
+		server_=ch_.advertiseService(service_name_, &ImgSender::sendimg,this);
 	}
 
 	void imgsaver(const sensor_msgs::ImageConstPtr& msg){
@@ -65,6 +66,7 @@ private:
 	ros::CallbackQueue server_queue_;
 	ros::CallbackQueue image_queue_;
 	std::string topic_name_;
+	std::string service_name_;
 
 };
 
