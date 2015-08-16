@@ -1,14 +1,28 @@
 <launch>
  <!-- Node Settings -->
     <arg name="lepton_on" default="false"/>
-    <arg name="tamarisk_on" default="false"/>
+    <arg name="tamarisk_on" default="true"/>
     <arg name="bluefox_right_on" default="true"/>
-    <arg name="bluefox_left_on" default="false"/>
+    <arg name="bluefox_left_on" default="true"/>
 
 <!-- Save on Command Node bluefox right-->
 <node if="$(arg bluefox_right_on)"
 name="bluefox_right_image_server" pkg="image_sender" type="img_sender_server" output="screen">
 	<param name="identifier" type="string" value="/mv_25000060/image_raw"/>
 	<param name="service_name" type="string" value="/server/mv_25000060"/>
+</node>
+
+<!-- Save on Command Node bluefox left-->
+<node if="$(arg bluefox_left_on)"
+name="bluefox_left_image_server" pkg="image_sender" type="img_sender_server" output="screen">
+	<param name="identifier" type="string" value="/mv_25000075/image_raw"/>
+	<param name="service_name" type="string" value="/server/mv_25000075"/>
+</node>
+
+<!-- Save on Command Node tamarisk-->
+<node if="$(arg tamarisk_on)"
+name="tamarisk_image_server" pkg="image_sender" type="img_sender_server" output="screen">
+	<param name="identifier" type="string" value="/camera/image_raw"/>
+	<param name="service_name" type="string" value="/server/tamarisk"/>
 </node>
 </launch>
